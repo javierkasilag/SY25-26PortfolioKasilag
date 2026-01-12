@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+    <form action="submit">
+        <label for="fullName">Full Name: </label><input type="text" id="fullName" name="fullName" required><br>
+        <label for="birthday">Birthday: </label><input type="date" id="birthday" name="birthday" required><br>
+        <label for="email">Email Address: </label><input type="email" id="email" name="email" required><br>
+        <label for="phoneNumber">Phone Number: </label><input type="text" id="phoneNumber" name="phoneNumber" required><br>
+        <label for="gradeLevel">Grade Level: </label>
+        <select name="gradeLevel" id="gradeLevel" required>
+            <option></option>
+            <option>7</option>
+            <option>8</option>
+            <option>9</option>
+            <option>10</option>
+            <option>11</option>
+            <option>12</option>
+        </select><br>
+        <label for="internOrExtern">Intern or Extern: </label><br>
+        <label><input type="radio" id="internOrExtern" name="internOrExtern" value="intern" required>Intern</label>
+        <label><input type="radio" id="internOrExtern" name="internOrExtern" value="extern" required>Extern</label><br>
+        <label for="org">Preferred Organization or Club: </label>
+        <select name="org" id="org" required>
+            <option></option>
+            <option>Aksis</option>
+            <option>Ellipsis</option>
+            <option>Invictus</option>
+            <option>Model United Nations</option>
+            <option>Student Catholic Action</option>
+        </select><br>
+        <label for="orgReason">Why you want to join: </label><br>
+        <textarea id="orgReason" name="orgReason" placeholder="Type your reason here..." required></textarea>
+    </form>
+</html>
