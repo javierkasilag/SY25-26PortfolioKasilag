@@ -1,12 +1,29 @@
 <!DOCTYPE html>
+<style>
+    input, select, textarea {
+        background-color: black;
+        color: white;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
+    }
+    input:focus, select:focus, textarea:focus {
+        border: 2px solid rgb(99, 154, 255);
+        outline: none;
+    }
+    html {
+        background-color: rgb(14, 14, 14);
+        color: white;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
+    }
+    
+</style>
 <html>
-    <form method="post" action="submit">
-        <label for="fullName">Full Name: </label><input type="text" id="fullName" name="fullName" required><br>
-        <label for="birthday">Birthday: </label><input type="date" id="birthday" name="birthday" required><br>
-        <label for="email">Email Address: </label><input type="email" id="email" name="email" required><br>
-        <label for="phoneNumber">Phone Number: </label><input type="text" id="phoneNumber" name="phoneNumber" required><br>
+    <form method="post" action="submit" onsubmit="return confirmSubmit()" onreset="return confirmReset()">
+        <label for="fullName">Full Name: </label><input type="text" id="fullName" name="fullName" onblur="return markEmpty(this)" required><br>
+        <label for="birthday">Birthday: </label><input type="date" id="birthday" name="birthday" onblur="return markEmpty(this)" required><br>
+        <label for="email">Email Address: </label><input type="email" id="email" name="email" onblur="return markEmpty(this)" required><br>
+        <label for="phoneNumber">Phone Number: </label><input type="text" id="phoneNumber" name="phoneNumber" onblur="return markEmpty(this)" required><br>
         <label for="gradeLevel">Grade Level: </label>
-        <select name="gradeLevel" id="gradeLevel" required>
+        <select name="gradeLevel" id="gradeLevel" onblur="return markEmpty(this)" required>
             <option></option>
             <option>7</option>
             <option>8</option>
@@ -16,10 +33,10 @@
             <option>12</option>
         </select><br>
         <label for="internOrExtern">Intern or Extern: </label><br>
-        <label><input type="radio" id="internOrExtern" name="internOrExtern" value="intern" required>Intern</label>
-        <label><input type="radio" id="internOrExtern" name="internOrExtern" value="extern" required>Extern</label><br>
+        <label><input type="radio" id="internOrExtern" name="internOrExtern" value="intern" onblur="return markEmpty(this)" required>Intern</label>
+        <label><input type="radio" id="internOrExtern" name="internOrExtern" value="extern" onblur="return markEmpty(this)" required>Extern</label><br>
         <label for="org">Preferred Organization or Club: </label>
-        <select name="org" id="org" required>
+        <select name="org" id="org" onblur="return markEmpty(this)" required>
             <option></option>
             <option>Aksis</option>
             <option>Ellipsis</option>
@@ -28,8 +45,35 @@
             <option>Student Catholic Action</option>
         </select><br>
         <label for="orgReason">Why you want to join: </label><br>
-        <textarea id="orgReason" name="orgReason" placeholder="Type your reason here..." required></textarea><br>
+        <textarea id="orgReason" name="orgReason" placeholder="Type your reason here..." onblur="return markEmpty(this)" required></textarea><br>
         <input type="submit" value="Submit">
         <input type="reset" value="Reset">
     </form>
 </html>
+<script>
+    function confirmSubmit() {
+        let confirmed = confirm("Are you sure you want to submit?");
+        if (confirmed) {
+            return true;
+        }
+        return false;
+    }
+
+    function confirmReset() {
+        let reset = confirm("Are you sure you want to reset?");
+        if (reset) {
+            return true;
+        }
+        return false;
+    }
+
+    function markEmpty(field) {
+        if (field.value === "")
+        {
+            field.style.borderColor = "red";
+        }
+        else {
+            field.style.borderColor = ""; 
+        }
+    }
+</script>
