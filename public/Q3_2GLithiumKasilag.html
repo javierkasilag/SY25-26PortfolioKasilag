@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-    <form action="submit">
+    <form method="post" action="submit">
         <label for="fullName">Full Name: </label><input type="text" id="fullName" name="fullName" required><br>
         <label for="birthday">Birthday: </label><input type="date" id="birthday" name="birthday" required><br>
         <label for="email">Email Address: </label><input type="email" id="email" name="email" required><br>
@@ -28,6 +28,8 @@
             <option>Student Catholic Action</option>
         </select><br>
         <label for="orgReason">Why you want to join: </label><br>
-        <textarea id="orgReason" name="orgReason" placeholder="Type your reason here..." required></textarea>
+        <textarea id="orgReason" name="orgReason" placeholder="Type your reason here..." required></textarea><br>
+        <input type="submit" value="Submit">
+        <input type="reset" value="Reset">
     </form>
 </html>
