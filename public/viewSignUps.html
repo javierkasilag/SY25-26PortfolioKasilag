@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<style>
+    input, select, textarea, button {
+        background-color: black;
+        color: white;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
+    }
+    input:focus, select:focus, textarea:focus, button:focus {
+        border: 2px solid #639aff;
+        outline: none;
+    }
+    html {
+        background-color: rgb(14, 14, 14);
+        color: white;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
+    }
+    a {
+        color: #639aff; 
+    }
+    a:active {
+        color: #bdd4ff; 
+    }
+    table {
+        border: 1px solid white;
+        text-align: center;
+        vertical-align: middle;
+        border-collapse: collapse;
+    }
+    td, tr, th {
+        border: 1px solid white;
+    }
+</style>
+<html>
+    <h1>Students Who Signed Up</h1>
+    <h2>By Edgardo Javier D. Kasilag III</h2>
+    <button onclick="backToSignup()">Back to Signup</button>
+    <br><br>
+    <label for="clubFilter">Filter by Club: </label>
+    <select id="clubFilter" onchange="filterSignups()">
+        <option value="ALL">ALL</option>
+        <option value="Aksis">Aksis</option>
+        <option value="Ellipsis">Ellipsis</option>
+        <option value="Invictus">Invictus</option>
+        <option value="Model United Nations">Model United Nations</option>
+        <option value="Student Catholic Action">Student Catholic Action</option>
+    </select>
+    <p id="totalCount"></p>
+    <div id="signupsContainer"></div>
+</html>
+<script>
+    function backToSignup() {
+        window.location.href = 'Q3_2GLithiumKasilag.html';
+    }
+
+    window.onload = function() {
+        displaySignups('ALL');
+    };
+
+    function filterSignups() {
+        let selectedClub = document.getElementById('clubFilter').value;
+        displaySignups(selectedClub);
+    }
+
+    function displaySignups(clubFilter) {
+        let container = document.getElementById('signupsContainer');
+        let totalCountElement = document.getElementById('totalCount');
+        let signupsData = localStorage.getItem('signups');
+        
+        if (!signupsData) {
+            container.innerHTML = '<div class="message">No sign-ups yet...</div>';
+            totalCountElement.textContent = 'Total Sign-ups: 0';
+            return;
+        }
+        
+        let allSignups = JSON.parse(signupsData);
+
+        let filteredSignups = allSignups;
+        if (clubFilter !== 'ALL') {
+            filteredSignups = allSignups.filter(signup => signup.org === clubFilter);
+        }
+
+        if (filteredSignups.length === 0) {
+            container.innerHTML = `<div class="message">No sign-ups for the club...</div>`;
+            totalCountElement.textContent = 'Total Sign-ups: 0';
+            return;
+        }
+        
+        totalCountElement.textContent = `Total Sign-ups: ${filteredSignups.length}`;
+        
+        let tableHTML = `
+            <table>
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Full Name</th>
+                        <th>Birthday</th>
+                        <th>Email</th>
+                        <th>Phone</th>
+                        <th>Grade</th>
+                        <th>Type</th>
+                        <th>Organization</th>
+                        <th>Reason</th>
+                    </tr>
+                </thead>
+                <tbody>
+        `;
+        
+        filteredSignups.forEach((signup, index) => {
+            tableHTML += `
+                <tr>
+                    <td>${index + 1}</td>
+                    <td>${signup.fullName}</td>
+                    <td>${signup.birthday}</td>
+                    <td>${signup.email}</td>
+                    <td>${signup.phoneNumber}</td>
+                    <td>${signup.gradeLevel}</td>
+                    <td>${signup.internOrExtern}</td>
+                    <td>${signup.org}</td>
+                    <td>${signup.orgReason}</td>
+                </tr>
+            `;
+        });
+        
+        tableHTML += `
+                </tbody>
+            </table>
+        `;
+        
+        container.innerHTML = tableHTML;
+    }
+</script>
