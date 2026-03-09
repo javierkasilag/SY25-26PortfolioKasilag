@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <style>
+            .star {
+                font-size: 28px;
+                cursor: pointer;
+                color: #7c7c7c;
+            }
+
+            .star.selected {
+                color: #f5c518;
+            }
+
+            body {
+                font-family: Arial, sans-serif;
+                background-color: black;
+                display: flex;
+                flex-direction: column; /* add this */
+                align-items: center;    /* replaces justify-content: center */
+                padding: 40px 16px;
+            }
+
+            .card {
+                color: white;
+                background: black;
+                border: 5px solid white;
+                padding: 32px 28px;
+                width: 100%;
+                max-width: 480px;
+            }
+
+            h1, h2 {
+                text-align: center;
+            }
+
+            input[type="text"], select {
+                color: white;
+                background: black;
+                width: 100%;
+                padding: 8px;
+                border: 1px solid white;
+                border-radius: 6px;
+                font-size: 15px;
+                box-sizing: border-box;
+            }
+
+            #addButton {
+                width: 100%;
+                margin-top: 16px;
+                padding: 12px;
+                background-color: gray;
+                color: white;
+                font-size: 16px;
+                border: none;
+                border-radius: 8px;
+                cursor: pointer;
+            }
+
+            #addButton:hover {
+                background-color: #1558b0;
+            }
+
+            .movie-entry {
+                border: 4px solid white;
+                border-radius: 8px;
+                padding: 10px 14px;
+                margin-top: 10px;
+                background-color: black;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="card">
+            <h1>Add a Movie</h1>
+            <form>
+                <label for="title">Title:</label><br>
+                <input type="text" id="title"/><br><br>
+                <label for="year">Year:</label><br>
+                <input type="text" id="year"/><br><br>
+                <label for="genre">Genre:</label><br>
+                <select id="genre">
+                    <option value="Action">Action</option>
+                    <option value="Comedy">Comedy</option>
+                    <option value="Drama">Drama</option>
+                    <option value="Horror">Horror</option>
+                    <option value="Romance">Romance</option>
+                    <option value="Sci-Fi">Sci-Fi</option>
+                    <option value="Thriller">Thriller</option>
+                </select><br><br>
+                <div class="stars" id="starContainer">
+                    <label>Rating:</label><br>
+                    <span class="star" data-value="1">★</span>
+                    <span class="star" data-value="2">★</span>
+                    <span class="star" data-value="3">★</span>
+                    <span class="star" data-value="4">★</span>
+                    <span class="star" data-value="5">★</span>
+                </div>
+                <button id="addButton">Add Movie</button>
+                    <div id="movieList">
+                        <h2>Movie List</h2>
+                        <p id="listBlank">No movies added yet.</p>
+                    </div>
+                </div> <!-- end of .card -->
+            </form><br>
+        <script>
+            let selectedRating = 0;
+            let stars = document.querySelectorAll(".star");
+
+            stars.forEach(function(star) {
+                star.addEventListener("click", function() {
+                    selectedRating = parseInt(star.getAttribute("data-value"));
+
+                    stars.forEach(function(s) {
+                        if (parseInt(s.getAttribute("data-value")) <= selectedRating) {
+                            s.classList.add("selected");
+                        } else {
+                            s.classList.remove("selected");
+                        }
+                    });
+                });
+            });
+
+            function displayMovies() {
+
+                let movies = JSON.parse(localStorage.getItem("movies")) || [];
+                let movieList = document.getElementById("movieList");
+                let listBlank = document.getElementById("listBlank");
+
+
+                if (movies.length > 0) {
+                    listBlank.style.display = "none";
+                }
+
+                movieList.innerHTML = "<h2>Movie List</h2>";
+                movies.forEach(function(movie) {
+                    let starHTML = "";
+                    for (let i = 1; i <= 5; i++) {
+                        if (i <= movie.rating) {
+                            starHTML += "<span style='color:#f5c518'>★</span>";
+                        } else {
+                            starHTML += "<span style='color:#ccc'>★</span>";
+                        }
+                    }
+                    let entry = document.createElement("div");
+                    entry.classList.add("movie-entry");
+                    entry.innerHTML = `
+                        <p><strong>${movie.title}</strong> (${movie.year}) — ${movie.genre}</p>
+                        <p>${starHTML}</p>
+                    `;
+
+                    movieList.appendChild(entry);
+                });
+            }
+            
+            displayMovies();
+
+            document.getElementById("addButton").addEventListener("click", function() {
+
+                let title = document.getElementById("title").value;
+                let year = document.getElementById("year").value;
+                let genre = document.getElementById("genre").value;
+
+                if (!title || !year || selectedRating === 0) {
+                    alert("Please fill in all fields and select a rating!");
+                    return;
+                }
+
+                let newMovie = {
+                    title: title,
+                    year: year,
+                    genre: genre,
+                    rating: String(selectedRating)
+                };
+
+                let movies = JSON.parse(localStorage.getItem("movies")) || [];
+                movies.push(newMovie);
+                localStorage.setItem("movies", JSON.stringify(movies));
+                displayMovies();
+                console.log("Saved!", movies);
+            });
+        </script>
+    </body>
+</html>
