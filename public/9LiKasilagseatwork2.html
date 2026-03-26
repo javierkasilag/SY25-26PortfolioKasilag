@@ -11,6 +11,9 @@
     }
     .footer {
        opacity: 0.5;
+       position: fixed;
+       bottom: 0;
+       width: 100%;
     }
     .sidebar {
       background: lightgreen;
@@ -24,7 +27,18 @@
       background: lightyellow;
       width: 300px;
       height: 200px;
-    }    
+      position: absolute;
+      top: 66px;
+      left: 200px;
+    }
+    .notice {
+        position: absolute;
+        top: 80px;
+        left: 420px;
+        background: orange;
+        padding: 10px;
+        z-index: 2;
+    } 
   </style>
 </head>
 <body>
@@ -32,5 +46,6 @@
   <div class="sidebar">Sidebar</div>
   <div class="content">Main Content</div>
   <div class="footer">Footer</div>
+  <div class="notice">Notice!</div>
 </body>
 </html>

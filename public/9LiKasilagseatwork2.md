@@ -1,5 +1,4 @@
 ***
-# INSTRUCTIONS AND QUESTIONS
 # Seatwork #2 - Getting to know CSS Position and z-index.
 ### This seatwork will ask you to implement the different CSS position on a given code.
 ### short link to this .md file is: https://bit.ly/4c61P9K
@@ -58,18 +57,21 @@
 - Add in css ```position: relative; top: 20px; left: 20px;``` to .sidebar.
 
 - Guided Question: What changed compared to the default static positioning? Try to give different values to top and left or you can change it to bottom, right.
+  ANSWER: Compared to the default static positioning, the sidebar box is positioned more towards the right and towards the bottom.
 
 ### Step 2 (Fixed):
 
 - Add in css ```position: fixed; bottom: 0; width: 100%;``` to .footer.
 
 - Guided Question: What happens when you scroll the page? Why does the footer behave differently from position relative?
+  ANSWER: When scrolling, the footer remains in the same position. It behaves differently from position relative because its fixed position is relative to the viewport or browser window rather than the document, removing it from the normal document flow.
 
 ### Step 3 (Absolute):
 
 - Add in css ```position: absolute; top: 66px; left: 200px;``` to .content.
 
 - Guided Question: What is the effect of position: absolute on an element? How is it different from fixed?
+  ANSWER: Like position fixed, position absolute removes an element from the normal document flow. However, unlike position fixed, it positions the element relative to the nearest positioned ancestor (where it was originally) or the document body if no such ancestor exists. An element with position absolute also moves with the page when you scroll.
 
 ### Step 4 : (Absolute)
 
@@ -89,30 +91,33 @@
 - Give .content a z-index: 1.
 
 - Guided Question: Why does the notice appear on top of the content? What happens if you swap the z‑index values?
+  ANSWER: The notice appears on top of the content because it has a higher z-index value than the content. Swapping the z-index values will display the notice behind the content, if the content has a higher z-index value.
 
 - Challenge: 
-    * What changes that you have to do on the code that will position .notice box on the top right corner of the .content box? Please write the code on paper as well (both html and css on the part of .notice and .content).
+    * What changes that you have to do on the code that will position .notice box on the top right corner of the .content box?
+      ANSWER: 20px has to be added to both the top and left px values of .notice.
     * Try to change the position of .content to relative then to fixed. What do you observed each time?
+      ANSWER: When changed to position relative, .content moves further downward from its original position under position absolute. When changed to position fixed, .content looks the same as itself under position absolute, but its behavior changes in that it does not scroll with the page.
     * What do you observe on about the effect of z-index on .notice and .content boxes?
+      ANSWER: The z-index affects which box goes on top of the other.
 
 3. Please answer the following reflection questions (15 minutes)
 
-    a. Could you summarize the differences between the CSS position values (static, relative, absolute, fixed)? 
+    a. Could you summarize the differences between the CSS position values (static, relative, absolute, fixed)?
+       ANSWER:
+       - Static: Default positioning of an element, follows normal document flow
+       - Relative: Positioning relative to element's original positioning in the document flow
+       - Absolute: Positioning relative to element's nearest positioned ancestor (where it was originally), removes element from normal document flow
+       - Fixed: Positioning relative to viewport, removes element from normal document flow
 
     b. How does absolute positioning depend on its parent element?
+       ANSWER: Where an element moves when absolute positioning is applied is relative to the location the parent element on the document.
 
     c. How do you differentiate sticky from fixed (you can research on sticky)?
+       ANSWER: An element with sticky positioning has the properties of relative positioning until a certain scrolling threshold, after which it gains the properties of fixed positioning.
 
     d. If you were designing a webpage for a school event, how might you use positioning to highlight important information? Please give concrete examples.
-
-***
-# ANSWERS
-- Step 1:
-- Step 2:
-- Step 3:
-- Step 4:
-- Other guide questions:
-  a. 
-  b.
-  c.
-  d. 
+       ANSWER:
+       - Relative positioning: For miscellaneous elements, so that they can be positioned without removing them from the normal document flow where they are needed or part of
+       - Absolute positioning: For elements like event infoboxes or images, such that they do not affect the normal document flow and are more precisely positioned
+       - Fixed positioning: For webpage header and footer, where directories and links important to site navigation or event information can be listed
