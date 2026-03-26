@@ -1,4 +1,4 @@
----
+***
 # INSTRUCTIONS AND QUESTIONS
 # Seatwork #2 - Getting to know CSS Position and z-index.
 ### This seatwork will ask you to implement the different CSS position on a given code.
@@ -105,6 +105,6 @@
 
     d. If you were designing a webpage for a school event, how might you use positioning to highlight important information? Please give concrete examples.
 
----
+***
 # ANSWERS
 
